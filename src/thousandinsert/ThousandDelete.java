@@ -9,50 +9,44 @@ package thousandinsert;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  *
  * @author nierema_sd2081
  */
-public class ThousandInsert {
-
+public class ThousandDelete {
     
-    public static void main(String[] args) {
-        // TODO code application logic here
-        try{
+    public static void main (String[] args)
+    {
+        try
+        {
             String driver = "com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://localhost:3306/niere";
             
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, "root", "");
-
+            
             int count = 0;
-
+//            LocalDateTime now = LocalDateTime.now();  
             System.out.println("Time start: " + java.time.LocalTime.now());
-            while(!(count == 1000)){
-                int one =1 , two=2, three=3,four=4, five=5;
+            while(!(count == 1000))
+            {
                 
-                String insertQuery = " insert into insertThousand (one, two, tree, four, five)" + "values ('" + one + "','" + two + "', '"
-                    + three + "','" + four + "','" + five  + "')";                
+                String deleteQuery = " delete from insertThousand where one = 1"; 
+
                 Statement st = conn.createStatement();
-//                System.out.println(one+ " "+ two + " "+ three+ " "+ four+ " "+ five);
-                st.execute(insertQuery);
+//                System.out.println(wan + " " + two + " " + three + " " + four + " " + five);
+                st.execute(deleteQuery);
                 count++;
-
-            }
+            }   
             System.out.println("Time end: " + java.time.LocalTime.now());
-
-            // note that i'm leaving "date_created" out of this insert statement
             conn.close();
         }
         catch(Exception e)
         {
-            System.out.println("Got an exception");
+            System.out.println("Got an exception.");
             System.out.println(e.getMessage());
         }
     }
-    
 }

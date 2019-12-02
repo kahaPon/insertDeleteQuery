@@ -15,40 +15,41 @@ import java.time.LocalDateTime;
  *
  * @author nierema_sd2081
  */
-public class OpenClose {
+public class OpenCloseDelete {
     
-    public static void main (String []args)
+    public static void main (String[] args)
     {
         try
         {
+//            LocalDateTime now = LocalDateTime.now();  
             System.out.println("Time start: " + java.time.LocalTime.now());
+            
             int count=0;
-            while(!((count==300)))
+            
+            while(!(count==300))
             {
                 String driver = "com.mysql.jdbc.Driver";
                 String url = "jdbc:mysql://localhost:3306/niere";
+                
                 Class.forName(driver);
+                Connection conn = DriverManager.getConnection(url, "root", "");
                 
-                Connection conn = DriverManager.getConnection(url, "root", ""); 
-                
-                int one =1 , two=2, three=3,four=4, five=5;
-                
-                String insertQuery = " insert into insertThousand (one, two, tree, four, five)" + "values ('" + one + "','" + two + "', '"
-                    + three + "','" + four + "','" + five  + "')";                
+               String deleteQuery = "delete from insertthousand where one=1";
+                    
                 Statement st = conn.createStatement();
-//                System.out.println(one+ " "+ two + " "+ three+ " "+ four+ " "+ five);
-                st.execute(insertQuery);
-           
+                st.execute(deleteQuery);
+
                 conn.close();
                 count++;
-            }
+            }         
             System.out.println("Time end: " + java.time.LocalTime.now());
+
         }
         catch(Exception e)
         {
             System.out.println("Got an exception.");
             System.out.println(e.getMessage());
         }
+        
     }
-    
 }
